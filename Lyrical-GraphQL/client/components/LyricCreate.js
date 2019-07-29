@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import query from '../queries/fetchSong';
 
 class LyricCreate extends Component {
     constructor(props) {
@@ -13,13 +12,11 @@ class LyricCreate extends Component {
 
     onSubmit(event) {
         event.preventDefault();
-        event.stopPropagation();
         this.props.mutate({
             variables: { 
                 content: this.state.content,
                 songId: this.props.songId
-            },
-            refetchQueries: [{ query }]
+            }
         }).then(() => this.setState({ content: '' }))
         .catch(() => {})
     }
@@ -46,6 +43,7 @@ const mutation = gql`
             lyrics {
                 id
                 content
+                likes
             }
         }
     }

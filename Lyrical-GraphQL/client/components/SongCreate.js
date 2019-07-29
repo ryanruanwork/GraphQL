@@ -13,7 +13,6 @@ class SongCreate extends Component {
 
     onSubmit(event) {
         event.preventDefault();
-        event.stopPropagation();
         this.props.mutate({
             variables: { title: this.state.title },
             refetchQueries: [{ query }]
@@ -40,7 +39,8 @@ class SongCreate extends Component {
 const mutation = gql`
     mutation AddSong($title: String){
         addSong(title: $title) {
-        title
+            id
+            title
     }
 }
 `;
