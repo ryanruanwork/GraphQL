@@ -13,6 +13,7 @@ class SongCreate extends Component {
 
     onSubmit(event) {
         event.preventDefault();
+        event.stopPropagation();
         this.props.mutate({
             variables: { title: this.state.title },
             refetchQueries: [{ query }]
